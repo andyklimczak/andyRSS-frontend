@@ -14,6 +14,11 @@ export default new Vuex.Store({
     addItems(state, items) {
       state.items = state.items.concat(items);
     },
+    markItemAsRead(state, item) {
+      console.log(item);
+      console.log(item.id);
+      item.read = true;
+    },
   },
   actions: {
     fetchFeed({ commit, state }) {
@@ -23,6 +28,16 @@ export default new Vuex.Store({
           console.log(response);
           commit('addItems', response.data);
         });
+    },
+    updateReadItem({ commit, state }, item) {
+      console.log('update item read');
+      return axios.patch(`http://localhost:3000/items/${item.id}`, {
+        item: {
+          read: true,
+        },
+      }).then((response) => {
+        commit('markItemAsRead', item);
+      });
     },
   },
 });
