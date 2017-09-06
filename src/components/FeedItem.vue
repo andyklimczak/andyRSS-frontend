@@ -25,15 +25,14 @@ export default {
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped>
-.feed-item {
-  align-content: flex-start;
-  align-items: flex-start;
-  display: flex;
-  flex-wrap: nowrap;
-  justify-content: space-between;
-}
-.read a {
-  color: grey;
-}
+<style scoped lang="sass">
+.feed-item
+  align-content: flex-start
+  align-items: flex-start
+  display: flex
+  flex-wrap: nowrap
+  justify-content: space-between
+
+.read a
+  color: grey
 </style>
