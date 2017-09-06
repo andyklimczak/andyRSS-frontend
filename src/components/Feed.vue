@@ -36,4 +36,11 @@
   a {
     color: #42b983;
   }
+
+.feed {
+  margin-right: auto;
+  margin-left: auto;
+  padding-right: 500px;
+  padding-left: 500px;
+}
 </style>
