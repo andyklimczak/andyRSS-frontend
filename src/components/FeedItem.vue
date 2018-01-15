@@ -7,7 +7,7 @@
       {{ item.title }}
     </a>
     <span>
-      {{ item.created_at }}
+      {{ item.published_at }}
     </span>
   </div>
 </template>

@@ -1,6 +1,9 @@
 <template>
-  <div class="feed">
+  <div v-if="$store.state.items.length > 0" class="feed">
     <feed-item v-for="item in $store.state.items" :key="item.id" :item="item"></feed-item>
+  </div>
+  <div v-else>
+    No items!
   </div>
 </template>
 
