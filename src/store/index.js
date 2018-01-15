@@ -9,10 +9,14 @@ export default new Vuex.Store({
   state: {
     msg: 'state msg',
     items: [],
+    feeds: [],
   },
   mutations: {
     addItems(state, items) {
       state.items = state.items.concat(items);
+    },
+    addFeeds(state, feeds) {
+      state.feeds = state.feeds.concat(feeds);
     },
     markItemAsRead(state, item) {
       console.log(item);
@@ -38,6 +42,13 @@ export default new Vuex.Store({
       }).then((response) => {
         commit('markItemAsRead', item);
       });
+    },
+    fetchFeeds({ commit, state }) {
+      console.log('fetch feeds');
+      return axios.get('http://localhost:3000/feeds')
+        .then((response) => {
+          commit('addFeeds', response.data);
+        });
     },
   },
 });

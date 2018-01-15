@@ -13,26 +13,26 @@
 </template>
 
 <script>
-export default {
-  name: 'feed-item',
-  props: ['item'],
-  methods: {
-    itemClicked() {
-      this.$store.dispatch('updateReadItem', this.item);
+  export default {
+    name: 'feed-item',
+    props: ['item'],
+    methods: {
+      itemClicked() {
+        this.$store.dispatch('updateReadItem', this.item);
+      },
     },
-  },
-};
+  };
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="sass">
-.feed-item
-  align-content: flex-start
-  align-items: flex-start
-  display: flex
-  flex-wrap: nowrap
-  justify-content: space-between
+  .feed-item
+    align-content: flex-start
+    align-items: flex-start
+    display: flex
+    flex-wrap: nowrap
+    justify-content: space-between
 
-.read a
-  color: grey
+  .read a
+    color: grey
 </style>
