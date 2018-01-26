@@ -1,21 +1,28 @@
 <template>
   <div>
     <main-nav></main-nav>
-    feeds
+    <div v-if="$store.state.items.length > 0" class="feed">
+      <feed-item v-for="item in $store.state.items" :key="item.id" :item="item"></feed-item>
+    </div>
+    <div v-else>
+      No items!
+    </div>
   </div>
 </template>
 
 <script>
+  import FeedItem from '@/components/feed/FeedItem';
   import MainNav from '@/components/MainNav';
 
   export default {
-    name: 'feeds',
     components: {
+      FeedItem,
       MainNav,
     },
+    name: 'feed',
     created() {
       console.log('created');
-      this.$store.dispatch('fetchFeeds');
+      this.$store.dispatch('fetchFeed');
     },
   };
 </script>

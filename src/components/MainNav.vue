@@ -1,6 +1,7 @@
 <template>
   <div>
-    <router-link to="/feeds">Feeds</router-link>
+    <router-link to="/">Feed</router-link>
+    <router-link to="/feeds">Manage Feeds</router-link>
   </div>
 </template>
 

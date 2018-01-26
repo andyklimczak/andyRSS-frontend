@@ -23,6 +23,9 @@ export default new Vuex.Store({
       console.log(item.id);
       item.read = true;
     },
+    deleteFeed(state, feed) {
+      state.feeds = state.feeds.filter(f => f.id !== feed.id);
+    },
   },
   actions: {
     fetchFeed({ commit, state }) {
@@ -47,8 +50,26 @@ export default new Vuex.Store({
       console.log('fetch feeds');
       return axios.get('http://localhost:3000/feeds')
         .then((response) => {
+          console.log(response);
           commit('addFeeds', response.data);
         });
+    },
+    createFeed({ commit, state }, url) {
+      return axios.post('http://localhost:3000/feeds', {
+        feed: {
+          url,
+        },
+      }).then((response) => {
+        console.log(response);
+        commit('addFeeds', [response.data]);
+      });
+    },
+    deleteFeed({ commit, state }, feed) {
+      return axios.delete(`http://localhost:3000/feeds/${feed.id}`)
+      .then((response) => {
+        console.log('deleted', feed);
+        commit('deleteFeed', feed);
+      });
     },
   },
 });
