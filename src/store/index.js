@@ -1,6 +1,7 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
 import axios from 'axios';
+import _ from 'lodash';
 
 Vue.use(Vuex);
 
@@ -9,14 +10,20 @@ export default new Vuex.Store({
   state: {
     msg: 'state msg',
     items: [],
+    unreadItems: [],
     feeds: [],
   },
   mutations: {
     addItems(state, items) {
-      state.items = state.items.concat(items);
+      state.items = _.unionBy(state.items, items, 'id');
+      console.log(state.items);
+    },
+    addUnreadItems(state, items) {
+      state.unreadItems = _.unionBy(state.unreadItems, items, 'id');
+      console.log(state.items);
     },
     addFeeds(state, feeds) {
-      state.feeds = state.feeds.concat(feeds);
+      state.feeds = _.unionBy(state.feeds, feeds, 'id');
     },
     markItemAsRead(state, item) {
       console.log(item);
@@ -35,6 +42,14 @@ export default new Vuex.Store({
           console.log(response);
           commit('addItems', response.data);
         });
+    },
+    fetchUnreadFeed({ commit, state }) {
+      console.log('fetch feeds');
+      return axios.get('http://localhost:3000/unread_items')
+      .then((response) => {
+        console.log(response);
+        commit('addUnreadItems', response.data);
+      });
     },
     updateReadItem({ commit, state }, item) {
       console.log('update item read');
