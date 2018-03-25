@@ -5,6 +5,9 @@ import _ from 'lodash';
 
 Vue.use(Vuex);
 
+// const URL = 'http://localhost:3000';
+const URL = 'http://192.168.1.180:3000';
+
 export default new Vuex.Store({
   strict: true,
   state: {
@@ -37,7 +40,7 @@ export default new Vuex.Store({
   actions: {
     fetchFeed({ commit, state }) {
       console.log('fetch feed');
-      return axios.get('http://localhost:3000/items')
+      return axios.get(`${URL}/items`)
         .then((response) => {
           console.log(response);
           commit('addItems', response.data);
@@ -45,7 +48,7 @@ export default new Vuex.Store({
     },
     fetchUnreadFeed({ commit, state }) {
       console.log('fetch feeds');
-      return axios.get('http://localhost:3000/unread_items')
+      return axios.get(`${URL}/unread_items`)
       .then((response) => {
         console.log(response);
         commit('addUnreadItems', response.data);
@@ -53,7 +56,7 @@ export default new Vuex.Store({
     },
     updateReadItem({ commit, state }, item) {
       console.log('update item read');
-      return axios.patch(`http://localhost:3000/items/${item.id}`, {
+      return axios.patch(`${URL}/items/${item.id}`, {
         item: {
           read: true,
         },
@@ -63,14 +66,14 @@ export default new Vuex.Store({
     },
     fetchFeeds({ commit, state }) {
       console.log('fetch feeds');
-      return axios.get('http://localhost:3000/feeds')
+      return axios.get(`${URL}/feeds`)
         .then((response) => {
           console.log(response);
           commit('addFeeds', response.data);
         });
     },
     createFeed({ commit, state }, url) {
-      return axios.post('http://localhost:3000/feeds', {
+      return axios.post(`${URL}/feeds`, {
         feed: {
           url,
         },
@@ -80,7 +83,7 @@ export default new Vuex.Store({
       });
     },
     deleteFeed({ commit, state }, feed) {
-      return axios.delete(`http://localhost:3000/feeds/${feed.id}`)
+      return axios.delete(`${URL}/feeds/${feed.id}`)
       .then((response) => {
         console.log('deleted', feed);
         commit('deleteFeed', feed);
