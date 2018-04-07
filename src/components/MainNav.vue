@@ -2,6 +2,7 @@
   <div>
     <router-link to="/">Unread</router-link>
     <router-link to="/feed">All</router-link>
+    <router-link to="/favorite">Favorite</router-link>
     <router-link to="/feeds">Manage Feeds</router-link>
   </div>
 </template>

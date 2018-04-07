@@ -1,7 +1,7 @@
 <template>
   <div>
     <main-nav></main-nav>
-    <feed-list :items="$store.state.unreadItems"></feed-list>
+    <feed-list :items="$store.state.favoriteItems"></feed-list>
   </div>
 </template>
 
@@ -14,10 +14,10 @@
       FeedList,
       MainNav,
     },
-    name: 'feedUnread',
+    name: 'feedFavorite',
     created() {
       console.log('created');
-      this.$store.dispatch('fetchUnreadFeed');
+      this.$store.dispatch('fetchFavoriteFeed');
     },
   };
 </script>

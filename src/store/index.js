@@ -14,6 +14,7 @@ export default new Vuex.Store({
     msg: 'state msg',
     items: [],
     unreadItems: [],
+    favoriteItems: [],
     feeds: [],
   },
   mutations: {
@@ -25,6 +26,10 @@ export default new Vuex.Store({
       state.unreadItems = _.unionBy(state.unreadItems, items, 'id');
       console.log(state.items);
     },
+    addFavoriteItems(state, items) {
+      state.favoriteItems = _.unionBy(state.favoriteItems, items, 'id');
+      console.log(state.items);
+    },
     addFeeds(state, feeds) {
       state.feeds = _.unionBy(state.feeds, feeds, 'id');
     },
@@ -32,6 +37,11 @@ export default new Vuex.Store({
       console.log(item);
       console.log(item.id);
       item.read = true;
+    },
+    markItemAsFavorite(state, item) {
+      console.log(item);
+      console.log(item.id);
+      item.favorite = !item.favorite;
     },
     deleteFeed(state, feed) {
       state.feeds = state.feeds.filter(f => f.id !== feed.id);
@@ -54,6 +64,14 @@ export default new Vuex.Store({
         commit('addUnreadItems', response.data);
       });
     },
+    fetchFavoriteFeed({ commit, state }) {
+      console.log('fetch unread feeds');
+      return axios.get(`${URL}/favorite_items`)
+      .then((response) => {
+        console.log(response);
+        commit('addFavoriteItems', response.data);
+      });
+    },
     updateReadItem({ commit, state }, item) {
       console.log('update item read');
       return axios.patch(`${URL}/items/${item.id}`, {
@@ -62,6 +80,16 @@ export default new Vuex.Store({
         },
       }).then((response) => {
         commit('markItemAsRead', item);
+      });
+    },
+    toggleFavoriteItem({ commit, state }, item) {
+      console.log('toggle favorite item');
+      return axios.patch(`${URL}/items/${item.id}`, {
+        item: {
+          favorite: !item.favorite,
+        },
+      }).then((response) => {
+        commit('markItemAsFavorite', item);
       });
     },
     fetchFeeds({ commit, state }) {

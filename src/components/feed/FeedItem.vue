@@ -9,6 +9,9 @@
     <span>
       {{ item.published_at }}
     </span>
+    <span @click="itemFavorited">
+      Favorite? {{ item.favorite }}
+    </span>
   </div>
 </template>
 
@@ -19,6 +22,9 @@
     methods: {
       itemClicked() {
         this.$store.dispatch('updateReadItem', this.item);
+      },
+      itemFavorited() {
+        this.$store.dispatch('toggleFavoriteItem', this.item);
       },
     },
   };
