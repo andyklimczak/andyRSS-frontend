@@ -9,12 +9,12 @@ Vue.use(Router);
 export default new Router({
   routes: [
     {
-      path: '/',
+      path: '/feed',
       name: 'Feed',
       component: Feed,
     },
     {
-      path: '/unread',
+      path: '/',
       name: 'FeedUnread',
       component: FeedUnread,
     },

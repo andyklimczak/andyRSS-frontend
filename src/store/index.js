@@ -5,8 +5,8 @@ import _ from 'lodash';
 
 Vue.use(Vuex);
 
-// const URL = 'http://localhost:3000';
-const URL = 'http://192.168.1.180:3000';
+const URL = 'http://localhost:3000';
+// const URL = 'http://192.168.1.180:3000';
 
 export default new Vuex.Store({
   strict: true,
@@ -47,7 +47,7 @@ export default new Vuex.Store({
         });
     },
     fetchUnreadFeed({ commit, state }) {
-      console.log('fetch feeds');
+      console.log('fetch unread feeds');
       return axios.get(`${URL}/unread_items`)
       .then((response) => {
         console.log(response);
